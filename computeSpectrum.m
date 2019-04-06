@@ -8,5 +8,6 @@ XPhase = angle(X);
 XRe = real(X);
 XIm = imag(X);
 f = (0:(sample_rate_Hz/length(x)):sample_rate_Hz/2)';
+f = f(1:length(f)-1, 1);
 end
 

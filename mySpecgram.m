@@ -13,8 +13,8 @@ elseif window_type == 'hann'
     window = hann(block_size);
 end
 
-for i = 1:length(time_vector)
-    windowx = window.*X(:,i);
-    [freq_vector, magnitude_spectrogram,~,~,~] = computeSpectrum(windowx, sampling_rate_Hz);
-end
+% for i = 1:length(time_vector)
+%     windowx = window.*X(:,i);
+%     [freq_vector, magnitude_spectrogram,~,~,~] = computeSpectrum(windowx, sampling_rate_Hz);
+% end
 end
