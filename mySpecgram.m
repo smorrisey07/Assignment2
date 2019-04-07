@@ -5,16 +5,19 @@ sample_rate_Hz = sampling_rate_Hz;
 
 % Initiate variables
 freq_vector = zeros(block_size/2, 1);
-magnitude_spectrogram = zeros(block_size/2, length(time_vector));
+magnitude_spectrogram = zeros(block_size/2, size(time_vector, 2));
 
-if window_type == 'rect'
+if window_type == "rect"
     window = ones(block_size,1);
-elseif window_type == 'hann'
+elseif window_type == "hann"
     window = hann(block_size);
 end
 
-% for i = 1:length(time_vector)
-%     windowx = window.*X(:,i);
-%     [freq_vector, magnitude_spectrogram,~,~,~] = computeSpectrum(windowx, sampling_rate_Hz);
-% end
+for i = 1:size(time_vector, 2)
+    windowx = window.*X(:, i);
+    [freq_vector, magnitude_spectrogram(:,i),~,~,~] = computeSpectrum(windowx, sampling_rate_Hz);
+    size(freq_vector)
+    size(magnitude_spectrogram)
+    break
+end
 end
