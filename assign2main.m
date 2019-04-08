@@ -29,7 +29,7 @@ xlabel('Frequency')
 ylabel('Magnitude')
 title('Magnitude Spectrum of Sinusoidal')
 subplot(2,3, 3), plot(fX, XPhase);
-xlabel('Frequency')
+xlabel('Sample')
 ylabel('Phase')
 title('Phase Spectrum of Sinusoidal')
 [fY,YAbs,YPhase,YRe,YIm] = computeSpectrum(y, 44100);
@@ -38,32 +38,28 @@ xlabel('Frequency')
 ylabel('Magnitude')
 title('Magnitude Spectrum of Square Wave')
 subplot(2,3,6), plot(fY, YPhase);
-xlabel('Frequency')
+xlabel('Sample')
 ylabel('Phase')
 title('Phase Spectrum of Square Wave')
 
 %% Question 4
-[rect_freq_vector, rect_time_vector, rect_magnitude_spectrogram] = mySpecgram(x, 2048, 1024, 44100, 'rect');
-[hann_freq_vector, hann_time_vector, hann_magnitude_spectrogram] = mySpecgram(x, 2048, 1024, 44100, 'hann');
+[rect_freq_vector, rect_time_vector, rect_magnitude_spectrogram] = mySpecgram(y, 2048, 1024, 44100, 'rect');
+[hann_freq_vector, hann_time_vector, hann_magnitude_spectrogram] = mySpecgram(y, 2048, 1024, 44100, 'hann');
 
+figure(2)
+colorbar;
+subplot(3,1,1)
+p = image(rect_freq_vector, rect_time_vector, 20*log10(rect_magnitude_spectrogram));
+p.Parent.YDir = 'normal';
+title('Magnitude spectrogram using rectangular window')
+subplot(3,1,2)
 p = image(hann_freq_vector, hann_time_vector, 20*log10(hann_magnitude_spectrogram));
 p.Parent.YDir = 'normal';
-colorbar;
-% figure(2)
-% subplot(3,1,1)
-% plot(rect_magnitude_spectrogram, 1:length(rect_magnitude_spectrogram), 'y')
-% set(gca,'Color','b')
-% ylim([0 400])
-% title('Magnitude spectrogram using rectangular window')
-% subplot(3,1,2)
-% plot(hann_magnitude_spectrogram, 1:length(hann_magnitude_spectrogram), 'y')
-% set(gca,'Color','b')
-% ylim([0 400])
-% title('Magnitude spectrogram using Hann window')
-% subplot(3,1,3)
-% title('MATLAB Spectrogram')
-% spectrogram(y,hann(t),[],[],44100,'yaxis');
-% spectrogram(x, hann(2048), 1024, 2048, 'yaxis');
+title('Magnitude spectrogram using Hann window')
+subplot(3,1,3)
+title('MATLAB Spectrogram')
+spectrogram(y,hann(t),[],[],44100,'yaxis');
+%spectrogram(x, hann(2048), 1024, 2048, 'yaxis');
 %% tests
 [t, X] = generateBlocks(x, 44100, 2048, 1024);
 
